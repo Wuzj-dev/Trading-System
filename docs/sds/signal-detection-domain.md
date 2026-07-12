@@ -3,13 +3,13 @@
 ## Document Information
 - Version: V1.0
 - Status: Freeze
-- Scope: Trading signal detection program
+- Scope: Trading Signal Detection Program
 
 ## 1. System Definition
 ### Identity
 - This Domain is: Trading Signal Detection
-- Goal: Detect trading signals according to the system's stable behavior rules
-- System Role: Identify, classify, and expose signal-related domain behavior
+- Goal: Detect trading signals and expose signal-related domain behavior
+- System Role: Signal identification and notification boundary
 
 ### Description
 - This Domain represents the stable behavior boundary for trading signal detection
@@ -96,7 +96,7 @@
 
 ## 9. System Policy
 ### Current Policy
-- Default detection policy: configurable
+- Detection policy: configurable
 - Runtime thresholds: configurable
 - Version-specific signal rules: configurable
 
@@ -143,3 +143,4 @@
 
 ### Future Rule
 - Future items must not weaken the current stable design.
+

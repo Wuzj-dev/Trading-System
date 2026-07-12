@@ -26,6 +26,12 @@ This repository is organized around a stable documentation-first workflow for th
 - Status: Freeze
 - Scope: Trading signal detection design documentation
 
+## Versioning
+- `v1.0.0-docs`: initial repository documentation baseline
+- `v1.0.1-foundation`: foundation specification baseline
+- `v1.0.2-sds`: trading signal detection domain SDS baseline
+- `v1.0.3-review`: freeze checklist baseline
+
 ## Working Sequence
 1. Define or update Foundation.
 2. Write or update SDS.

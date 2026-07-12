@@ -3,80 +3,73 @@
 ## Document Information
 - Version: V1.0
 - Status: Freeze
-- Scope: Repository-wide foundation for all domain specifications and policy documents.
+- Scope: Trading signal detection program
 
 ## 1. Purpose
-This document defines the stable system-level principles that all other design documents must follow.
+This document defines the stable foundation rules for the trading signal detection program.
 
 ## 2. Identity
-The Foundation is the immutable reference for system design.
+The Foundation is the immutable reference for all design documents in this repository.
 
 ## 3. Scope
 ### In Scope
-- System-level principles
-- Design boundaries
+- Stable design principles
 - Ownership rules
-- Event and interaction rules
 - Runtime rules
-- Change and freeze rules
+- Event interaction rules
+- Change control rules
 
 ### Out of Scope
-- Domain-specific behavior
-- Configurable runtime values
-- Implementation details
-- Framework, language, data structure, and algorithm choices
+- Trading strategy implementation
+- Signal calculation implementation
+- Programming language choices
+- Framework choices
+- Data structure choices
+- Algorithm choices
 
 ## 4. Core Principles
-- Stable design takes priority over convenience.
-- Configurable rules must be managed independently from SDS.
+- Stable design takes priority over implementation convenience.
 - SDS describes behavior only.
-- Policy may change without rewriting SDS.
-- Every object must have exactly one owner.
-- Non-owner domains may read but must not modify.
-- Event delivery is for notification only.
+- Policy stores configurable rules and version differences.
+- Every object must have exactly one Owner.
+- Non-owner domains may read only.
+- Events notify state changes only.
 - Business data must be pulled from the owner domain.
 
-## 5. Terminology
-- **Foundation**: Stable system-level principles and constraints.
-- **SDS**: AI-executable specification that describes domain behavior.
-- **Policy**: Versioned and configurable rules that may change over time.
-- **ADR**: Architecture decision record used to approve foundation changes.
-- **Owner**: The only domain allowed to manage a given object.
-- **Runtime**: The current operational state of a domain.
-
-## 6. Design Rules
-- Foundation must remain stable over time.
+## 5. Design Rules
+- Foundation must remain stable.
 - Foundation changes require ADR.
-- Foundation must not be redefined by any domain.
-- Foundation must be referenced by all domain specifications.
+- Foundation must not be redefined by Domain SDS.
+- Foundation must be referenced by all domain documents.
 
-## 7. Relationship to SDS
-- SDS must follow Foundation.
-- SDS must not redefine Foundation.
-- SDS must only describe observable behavior.
+## 6. Ownership Rules
+- Each object has exactly one owner.
+- Only the owner may manage the object lifecycle.
+- No other domain may modify that object.
 
-## 8. Relationship to Policy
-- Policy stores configurable values, defaults, and version differences.
-- Policy may evolve across versions.
-- Policy must not overwrite stable SDS behavior definitions.
+## 7. Runtime Rules
+- Each domain must expose Health.
+- Each domain must expose Ready.
+- Runtime status must be queryable.
+- Downstream systems must not infer runtime state indirectly.
 
-## 9. Relationship to ADR
-- Any Foundation change must be recorded in ADR.
-- ADR explains why a Foundation rule changes.
-- ADR does not replace Foundation or SDS.
+## 8. Interaction Rules
+- Event Notify + Data Pull is required.
+- Events notify only.
+- Business data must be read from the owner domain.
+- Events must not carry business objects.
 
-## 10. Relationship to Review
-- Review checks whether Foundation, SDS, and Policy are aligned.
-- Review confirms readiness for Freeze.
+## 9. Change Rules
+- Stable principles change only through controlled review.
+- Any Foundation change requires ADR.
+- Policy changes do not rewrite Foundation.
 
-## 11. Forbidden
+## 10. Forbidden
 - Do not define implementation details.
-- Do not mix stable behavior with configurable policy.
-- Do not allow multiple owners for the same object.
-- Do not allow cyclic dependencies.
+- Do not mix configurable rules into stable principles.
+- Do not create cyclic dependencies.
 - Do not allow cross-layer direct access that violates architecture rules.
 
-## 12. Future
-- Future additions must not weaken the current stable design.
-- Future items should be added only through controlled review.
+## 11. Future
+- Future extensions must preserve the stable design boundary.
 
