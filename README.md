@@ -31,6 +31,12 @@ This repository is organized around a stable documentation-first workflow for th
 - `v1.0.1-foundation`: foundation specification baseline
 - `v1.0.2-sds`: trading signal detection domain SDS baseline
 - `v1.0.3-review`: freeze checklist baseline
+- `v1.1.1-system-definition`: signal capture system definition baseline
+
+## Key Design Documents
+- [Signal Capture System Definition](docs/foundation/signal-capture-system-definition.md)
+- [Domain Boundary Table](docs/foundation/domain-boundaries.md)
+- [Domain Dependency Map](docs/foundation/domain-dependency-map.md)
 
 ## Working Sequence
 1. Define or update Foundation.
