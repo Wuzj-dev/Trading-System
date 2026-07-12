@@ -307,6 +307,62 @@ Responsibilities:
 - 这是接入域里最关键的状态维护组件之一。
 - 它保证窗口一直是“最近 100 根”，而不是无限增长的仓库。
 
+### 9.5 Logging and Observability
+Responsibilities:
+- Record startup and shutdown lifecycle logs
+- Record websocket connect, disconnect, and reconnect logs
+- Record historical backfill and resync logs
+- Record validation failures, duplicate detection, and gap detection logs
+- Record window state changes and version updates
+- Expose structured logs for debugging and replay tracing
+
+中文注释：
+- 这里的日志不是交易日志，而是运行日志。
+- 重点是方便排查“数据从哪里来、哪里断了、哪里修了、哪里重复了”。
+- 日志应该尽量结构化，方便后面搜索和回放。
+- 这些日志不能替代事件总线，它们只是排查和审计辅助。
+
+Recommended log fields:
+- `logId`
+- `level`
+- `category`
+- `eventType`
+- `symbol`
+- `timeframe`
+- `source`
+- `message`
+- `occurredAt`
+- `windowVersion`
+- `traceId`
+- `recoveryAction`
+
+中文注释：
+- `logId`：日志唯一编号。
+- `level`：日志级别，比如 `debug`、`info`、`warn`、`error`。
+- `category`：日志分类，比如 `ingestion`、`validation`、`backfill`、`sync`。
+- `eventType`：对应的事件类型，方便日志和事件对上。
+- `symbol` / `timeframe`：方便定位到具体市场对象。
+- `source`：日志对应的数据来源。
+- `message`：人能读懂的描述。
+- `occurredAt`：日志发生时间。
+- `windowVersion`：对应的窗口版本。
+- `traceId`：贯穿一次接入或修复流程的追踪号。
+- `recoveryAction`：如果发生修复，记录执行了什么动作。
+
+### Logging Rules
+- Logs must not change business state.
+- Logs must not be used as the primary data source.
+- Error logs should include enough context to reproduce the issue.
+- Recovery logs should record what was fixed and why.
+- Sensitive credentials must never be written into logs.
+
+中文注释：
+- 日志只能看，不能驱动业务状态变化。
+- 日志不能代替主数据源。
+- 错误日志要尽量带上下文，不然不好排查。
+- 修复日志要写清楚“修了什么、为什么修”。
+- 密钥、凭证、私密信息绝对不能写进日志。
+
 ## 10. Recommended Data Structures
 
 ### 10.1 Candle

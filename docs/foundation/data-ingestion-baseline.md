@@ -134,3 +134,27 @@ All future documents generated from this baseline should follow the same archite
 - 你看 `Market State Domain SDS` 时，也应该主要理解它自己
 - 彼此可以交互，但不能互相代替
 
+## 14. Downstream Price Access Rule
+- Downstream functional domains must obtain price and K-line data through the owner domain's readable interface or published events.
+- Downstream domains must not access raw market sources directly.
+- Downstream domains must not rebuild their own independent market data source for the same owned market scope.
+- Downstream domains may read the latest standardized K-line data for their own analysis, but they must not modify the owner domain's window.
+
+## 中文说明
+后续功能域如果要拿价格和 K 线，规则要很清楚：
+- 不能自己直连交易所去抓同一份数据
+- 必须从 `Data Ingestion Domain` 提供的可读接口或事件流获取
+- 只能读，不能改
+- 不能自己再建一套重复的数据入口
+
+## 15. K-line Data Access Meaning
+- Price and K-line data are owned by the ingestion layer for the system's entry scope.
+- Analysis domains consume standardized data as read-only inputs.
+- The ingestion layer remains the single source of truth for the captured market window.
+
+## 中文说明
+这个意思是：
+- `Data Ingestion Domain` 负责维护真实的市场窗口
+- 其他域只消费这个窗口，不自己重建
+- 这样可以保证数据一致性，避免不同域看到不同版本的 K 线
+
