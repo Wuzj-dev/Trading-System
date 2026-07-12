@@ -112,3 +112,25 @@ All future documents generated from this baseline should follow the same archite
 - Future documents must keep the same stable architecture.
 - Future documents must not move decision logic into the ingestion layer.
 
+## 12. Document Separation Rule
+- Each functional domain must have its own separate design document.
+- Different functional domains must not share one SDS as the primary design document.
+- A domain document may reference other domain documents, but it must not replace them.
+
+## 中文说明
+这一条非常重要，它是后续所有设计文档生成的硬要求：
+- 一个功能域一份文档
+- 不能把多个功能域混在同一份 SDS 里
+- 可以相互引用
+- 但每个域都必须有自己的独立设计文档
+
+## 13. Domain Document Independence
+- The identity, responsibilities, behavior rules, and ownership of one domain must be described in its own document.
+- A domain document must remain readable and reviewable without requiring another domain's document to define its core meaning.
+
+## 中文说明
+这意味着：
+- 你看 `Data Ingestion Domain SDS` 时，就应该主要理解它自己
+- 你看 `Market State Domain SDS` 时，也应该主要理解它自己
+- 彼此可以交互，但不能互相代替
+
