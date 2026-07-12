@@ -38,6 +38,11 @@ This repository is organized around a stable documentation-first workflow for th
 - [Domain Boundary Table](docs/foundation/domain-boundaries.md)
 - [Domain Dependency Map](docs/foundation/domain-dependency-map.md)
 
+## Reading Guide
+- If you want to understand the whole system first, start with `Signal Capture System Definition`.
+- If you want to understand how the system is divided, read `Domain Boundary Table`.
+- If you want to understand who depends on whom, read `Domain Dependency Map`.
+
 ## Working Sequence
 1. Define or update Foundation.
 2. Write or update SDS.
