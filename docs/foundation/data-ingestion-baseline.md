@@ -1,5 +1,9 @@
 # Data Ingestion Domain Baseline
 
+## 中文说明
+这份文档不是单纯的功能说明，而是后续文档生成的母版。
+它把数据接入域的写法、章节结构、边界要求、数据获取方式都固定下来，后续其它域文档都要遵守这套架构。
+
 ## Document Information
 - Version: V1.0
 - Status: Freeze
@@ -47,20 +51,28 @@ All future documents generated from this baseline should follow the same archite
 
 ## 4. Core Baseline Requirements
 - The domain is the unique market data entry layer.
+- The domain is the unique market data producer for its captured external market scope.
 - The domain receives data from multiple markets or venues.
+- The domain retrieves initialization, historical, and missing data through approved source access paths.
+- The domain performs unified parsing, validation, normalization, timestamp standardization, and internal model mapping.
 - The domain maintains fixed-length windows.
 - The domain supports historical initialization.
+- The domain supports bootstrap lifecycle management.
 - The domain supports real-time synchronization.
 - The domain maintains data completeness.
 - The domain publishes unified events.
+- The domain maintains Ready and Health states.
 
 ## 中文说明
 这些是这份基础要求里最关键的几条：
 - 它是唯一入口
+- 它也是唯一数据生产者
 - 它负责接入与维护
+- 它负责统一处理，而不只是转发
 - 它要保证窗口固定长度
 - 它要维护数据完整性
 - 它要把统一事件流往下发
+- 它还要维护启动可用状态和健康状态
 
 ## 5. Supported Market Scope
 - Crypto
@@ -87,18 +99,30 @@ All future documents generated from this baseline should follow the same archite
 
 ## 8. Core Responsibilities
 - Data Ingestion
+- Data Retrieval
+- Unified Data Processing
 - Historical Initialization
+- Bootstrap Lifecycle
 - Real-Time Synchronization
 - Multi-Timeframe Aggregation
 - Data Integrity Maintenance
 - Event Publishing
+- Service Readiness Maintenance
+- Health Monitoring
 
 ## 9. Behavior Rules
 - Market → Ingestion → Event Bus → Downstream
+- No internal domain may bypass ingestion to access the same external market source directly
 - No market interpretation in this layer
 - Real-time websocket is preferred over REST
 - Automatic recovery is required
 - Window isolation must be preserved
+- Event publishing does not depend on downstream acknowledgement
+
+## 中文说明
+- 其它功能域不能绕过接入层去直接抓同一份市场数据。
+- 这个域发事件时，不需要等待下游确认才算完成职责。
+- 它的职责是统一接入、统一处理、统一广播。
 
 ## 10. Forbidden
 - Do not calculate signals
@@ -106,11 +130,26 @@ All future documents generated from this baseline should follow the same archite
 - Do not make strategy judgments
 - Do not predict market direction
 - Do not interpret market meaning
+- Do not move cache, persistence, or downstream query ownership into this baseline by default
 
 ## 11. Extension Rule
 - Future documents may be richer than this baseline.
 - Future documents must keep the same stable architecture.
 - Future documents must not move decision logic into the ingestion layer.
+
+## 11.1 Document Change Annotation Rule
+- Any document creation, deletion, migration, or major rewrite based on this baseline must include detailed Chinese annotations.
+- Chinese annotations must explain why the change is needed, what is changing, and what is intentionally not changing.
+- The annotation must be written before the change is considered complete.
+
+## 中文说明
+这条是后续文档生成和删除的硬要求：
+- 你要新建文档，要写中文说明
+- 你要删文档，要写中文说明
+- 你要迁移文档，要写中文说明
+- 你要大改文档，也要写中文说明
+
+不要让文档变化变成“默默发生”的事。
 
 ## 12. Document Separation Rule
 - Each functional domain must have its own separate design document.
@@ -127,6 +166,11 @@ All future documents generated from this baseline should follow the same archite
 ## 13. Domain Document Independence
 - The identity, responsibilities, behavior rules, and ownership of one domain must be described in its own document.
 - A domain document must remain readable and reviewable without requiring another domain's document to define its core meaning.
+
+## 13.1 Document Change Annotation Rule
+- Every new domain document created from this baseline must include Chinese explanatory notes.
+- Every deleted or migrated domain document must also include Chinese explanatory notes.
+- The notes must explain the reason for the change and the impact on domain ownership.
 
 ## 中文说明
 这意味着：
@@ -152,9 +196,11 @@ All future documents generated from this baseline should follow the same archite
 - Analysis domains consume standardized data as read-only inputs.
 - The ingestion layer remains the single source of truth for the captured market window.
 
+## 15.1 Change Annotation Reminder
+- If this baseline is updated in the future, the update must include Chinese annotations describing the change intent and scope.
+
 ## 中文说明
 这个意思是：
 - `Data Ingestion Domain` 负责维护真实的市场窗口
 - 其他域只消费这个窗口，不自己重建
 - 这样可以保证数据一致性，避免不同域看到不同版本的 K 线
-
