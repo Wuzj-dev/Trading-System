@@ -34,14 +34,18 @@ This repository is organized around a stable documentation-first workflow for th
 - `v1.1.1-system-definition`: signal capture system definition baseline
 
 ## Key Design Documents
+- [Architecture Overview](docs/architecture-overview.md)
 - [Signal Capture System Definition](docs/foundation/signal-capture-system-definition.md)
 - [Data Ingestion Domain Baseline](docs/foundation/data-ingestion-baseline.md)
+- [Signal System Architecture Guard Rules](docs/foundation/signal-architecture-guard-rules.md)
 - [Domain Boundary Table](docs/foundation/domain-boundaries.md)
 - [Domain Dependency Map](docs/foundation/domain-dependency-map.md)
 
 ## Reading Guide
+- If you want a quick full-picture summary, start with `Architecture Overview`.
 - If you want to understand the whole system first, start with `Signal Capture System Definition`.
 - If you want to use the Data Ingestion architecture as a template for later files, start with `Data Ingestion Domain Baseline`.
+- If you want the hard architecture constraints, start with `Signal System Architecture Guard Rules`.
 - If you want to understand how the system is divided, read `Domain Boundary Table`.
 - If you want to understand who depends on whom, read `Domain Dependency Map`.
 

@@ -1,4 +1,9 @@
-# Data Ingestion Domain Design
+# Deprecated: moved to SDS
+
+This document has been moved to:
+- [docs/sds/data-ingestion-domain.md](../sds/data-ingestion-domain.md)
+
+The foundation directory only keeps stable baseline documents.
 
 ## Document Information
 - Version: V1.1

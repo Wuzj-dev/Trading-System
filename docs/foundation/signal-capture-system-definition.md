@@ -91,7 +91,7 @@
 - Market state maintenance
 - Market structure analysis
 - Liquidity and imbalance analysis
-- Reversal and continuation tendency analysis
+- Prediction / probability analysis
 - Signal decision generation
 
 ### Out of Scope
@@ -107,7 +107,7 @@
 3. Market State Domain
 4. Market Structure Domain
 5. Liquidity & Imbalance Domain
-6. Reversal / Continuation Domain
+6. Prediction Domain
 7. Signal Decision Domain
 
 ## 4. Domain Boundary Summary
@@ -161,15 +161,17 @@
 - 它更像是在看市场“力的分布”和“压力点”。
 - 它不直接决定最终信号方向。
 
-### 4.6 Reversal / Continuation Domain
-- Owns directional tendency behavior
+### 4.6 Prediction Domain
+- Owns future behavior probability modeling
+- Does not define market structure
+- Does not define market state
 - Does not replace signal decision behavior
 - Does not own upstream data ingestion
 
 ### 中文理解
-- 这个域负责判断市场更像“要反转”还是“要延续”。
-- 它属于方向倾向层，不是最终决策层。
-- 它输出的是倾向，不是最终交易动作。
+- 这个域负责判断未来行为的概率分布。
+- 它输出的是 continuation、reversal、trap 这类概率结论。
+- 它不定义市场结构，也不定义市场状态。
 
 ### 4.7 Signal Decision Domain
 - Owns final signal decision behavior
